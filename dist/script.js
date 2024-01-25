@@ -100,7 +100,6 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.index = function () {
 _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.find = function (selector) {
   let numberOfItems = 0,
     counter = 0;
-  console.log(this);
   const copyObj = Object.assign({}, this);
   for (let i = 0; i < copyObj.length; i++) {
     const arr = copyObj[i].querySelectorAll(selector);
@@ -112,6 +111,46 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.find = function (selecto
       counter++;
     }
     numberOfItems += arr.length;
+  }
+  this.length = numberOfItems;
+  const objLength = Object.keys(this).length;
+  for (; numberOfItems < objLength; numberOfItems++) {
+    delete this[numberOfItems];
+  }
+  return this;
+};
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.closest = function (selector) {
+  let counter = 0;
+  for (let i = 0; i < this.length; i++) {
+    this[i] = this[i].closest(selector);
+    if (this[i] == null) {
+      delete this[i];
+    } else {
+      counter++;
+    }
+  }
+  this.length = counter;
+  const objLength = Object.keys(this).length;
+  for (; counter < objLength; counter++) {
+    delete this[counter];
+  }
+  return this;
+};
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.siblings = function () {
+  let numberOfItems = 0,
+    counter = 0;
+  const copyObj = Object.assign({}, this);
+  console.log(copyObj);
+  for (let i = 0; i < copyObj.length; i++) {
+    const arr = copyObj[i].parentNode.children;
+    for (let j = 0; j < arr.length; j++) {
+      if (copyObj[i] === arr[j]) {
+        continue;
+      }
+      this[counter] = arr[j];
+      counter++;
+    }
+    numberOfItems += arr.length - 1;
   }
   this.length = numberOfItems;
   const objLength = Object.keys(this).length;
@@ -387,7 +426,9 @@ __webpack_require__.r(__webpack_exports__);
 (0,_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('div').click(function () {
   console.log((0,_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])(this).index());
 });
-console.log((0,_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('.active').find('.more'));
+// console.log($('.active').find('.more'));
+// console.log($('.some').closest('.findme'));
+console.log((0,_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('.more').eq(0).siblings());
 })();
 
 /******/ })()
