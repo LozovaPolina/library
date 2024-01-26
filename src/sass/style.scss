@@ -1,25 +1,7 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+@import './general/ui.scss';
+@import './helpers/ui.scss';
+@import './components/ui.scss';
 
 
-button {
-    width: 150px;
-    height: 40px;
-    background: lightcoral;
-    text-align: center;
-}
 
 
-.active {
-    font-size: 20px;
-    color: forestgreen;
-}
-.findme {
-    width: 50%;
-    margin: 0 auto;
-    height: 6.25rem;
-    background: lightsalmon;
-}

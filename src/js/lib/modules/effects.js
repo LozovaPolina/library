@@ -42,7 +42,6 @@ $.prototype.fadeIn = function (dur, display = 'block', fin) {
 $.prototype.fadeOut = function (dur, fin) {
     for (let i = 0; i < this.length; i++) {
 
-
         const _fadeOut = (complection) => {
             this[i].style.opacity = 1 - complection;
             if (complection === 1) {
