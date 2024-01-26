@@ -1,4 +1,6 @@
 import $ from "../core";
+
+
 $.prototype.animateOverTime = function (dur, cb, fin) {
     let timeStart;
 
@@ -55,3 +57,15 @@ $.prototype.fadeOut = function (dur, fin) {
 
     return this;
 };
+
+$.prototype.fadeToggle = function (dur, display = 'block', fin ) {
+    for (let i = 0; i < this.length; i++) {
+        if (this[i].style.display !== 'none') {
+            $(this[i]).fadeOut(dur, display, fin);
+        } else {
+            $(this[i]).fadeIn(dur, display, fin);
+        }
+    }
+    return this;
+};
+
