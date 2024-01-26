@@ -32,13 +32,13 @@ $.prototype.getAttr = function (attributeName) {
     if (!attributeName) {
         return this;
     }
+
     for (let i = 0; i < this.length; i++) {
         if (!this[i].getAttribute(attributeName)) {
             continue;
         }
-        this[i].getAttribute(attributeName);
+        return this[i].getAttribute(attributeName);
     }
-    return this;
 };
 
 $.prototype.toggleAttr = function (attributeName, value = '') {
