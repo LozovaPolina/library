@@ -1,0 +1,36 @@
+.tab {
+    min-width: 700px;
+    &-panel {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        min-height: 50px;
+        border: 1px solid rgba(0,0,0,.2);
+        border-radius: 4px 4px 0 0;
+    }
+    &-item {
+        font-size: 1.125rem;
+        line-height: 1.6875rem;
+        text-align: center;
+        width: 100%;
+        padding:.625rem 1.25rem;
+        border-right: 1px solid rgba(0,0,0,.2);
+        cursor: pointer;
+        &:last-child {
+            border-right: none;
+        }
+        &-active {
+            background-color:rgba(0,0,0,.1);
+        }
+    }
+    &-content {
+        display: none;
+        padding: 1.25rem;
+        border: 1px solid rgba(0,0,0,.2);
+        border-top: none;
+        border-radius: 0 0 4px 4px;
+        &-active{
+            display: block;
+        }
+    }
+}

@@ -86,7 +86,6 @@ $.prototype.siblings = function () {
         counter = 0;
 
     const copyObj = Object.assign({}, this);
-    console.log(copyObj);
     
     for (let i = 0; i < copyObj.length; i++) {
         const arr = copyObj[i].parentNode.children; 
