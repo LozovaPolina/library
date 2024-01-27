@@ -10,15 +10,15 @@ import $ from './lib/lib';
 //     $('.text').fadeToggle(800);
 // });
 
-$('.wrap').html(
-    `
-    <div class="dropdown">
-        <button class="btn btn-dark dropdown-toggle" id="dropdownMenuBtn">Dropdown button</button>
-        <div class="dropdown-menu" data-toggle-id="dropdownMenuBtn">
-            <a href="#" class="dropdown-item">Action</a>
-            <a href="#" class="dropdown-item">Action #2</a>
-            <a href="#" class="dropdown-item">Action #3</a>
-        </div>
-    </div>`
-);
-$('.dropdown-toggle').dropdown();
+// $('.wrap').html(
+//     `
+//     <div class="dropdown">
+//         <button class="btn btn-dark dropdown-toggle" id="dropdownMenuBtn">Dropdown button</button>
+//         <div class="dropdown-menu" data-toggle-id="dropdownMenuBtn">
+//             <a href="#" class="dropdown-item">Action</a>
+//             <a href="#" class="dropdown-item">Action #2</a>
+//             <a href="#" class="dropdown-item">Action #3</a>
+//         </div>
+//     </div>`
+// );
+// $('.dropdown-toggle').dropdown();

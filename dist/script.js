@@ -23,6 +23,63 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.dropdown = function () {
 
 /***/ }),
 
+/***/ "./src/js/lib/components/modal.js":
+/*!****************************************!*\
+  !*** ./src/js/lib/components/modal.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./src/js/lib/core.js");
+
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.modal = function () {
+  const scroll = calcScroll();
+  for (let i = 0; i < this.length; i++) {
+    const target = (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(this[i]).getAttr('data-target');
+    (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(this[i]).click(e => {
+      e.preventDefault();
+      (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(target).fadeIn(500);
+      document.body.style.overflow = 'hidden';
+      document.body.style.marginRight = `${scroll}px`;
+    });
+  }
+  function calcScroll() {
+    let div = document.createElement('div');
+    div.style.cssText = `
+        width: 50px;
+        height: 50px;
+        overflow-y: scroll;
+        visibility: hidden;
+    `;
+    document.body.append(div);
+    let scrollWidth = div.offsetWidth - div.clientWidth;
+    div.remove();
+    return scrollWidth;
+  }
+  const closeElements = document.querySelectorAll('[data-close]');
+  closeElements.forEach(item => {
+    (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(item).click(() => {
+      (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])('.modal').fadeOut(500);
+      setTimeout(() => {
+        document.body.style.overflow = '';
+        document.body.style.marginRight = `${0}px`;
+      }, 500);
+    });
+  });
+  (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])('.modal').click(e => {
+    if (e.target.classList.contains('modal')) {
+      (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])('.modal').fadeOut(500);
+      setTimeout(() => {
+        document.body.style.overflow = '';
+        document.body.style.marginRight = `${0}px`;
+      }, 500);
+    }
+  });
+};
+(0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-toggle="modal"]').modal();
+
+/***/ }),
+
 /***/ "./src/js/lib/core.js":
 /*!****************************!*\
   !*** ./src/js/lib/core.js ***!
@@ -73,6 +130,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/actions */ "./src/js/lib/modules/actions.js");
 /* harmony import */ var _modules_effects__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/effects */ "./src/js/lib/modules/effects.js");
 /* harmony import */ var _components_dropdown__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/dropdown */ "./src/js/lib/components/dropdown.js");
+/* harmony import */ var _components_modal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/modal */ "./src/js/lib/components/modal.js");
+
 
 
 
@@ -518,16 +577,18 @@ __webpack_require__.r(__webpack_exports__);
 //     $('.text').fadeToggle(800);
 // });
 
-(0,_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('.wrap').html(`
-    <div class="dropdown">
-        <button class="btn btn-dark dropdown-toggle" id="dropdownMenuBtn">Dropdown button</button>
-        <div class="dropdown-menu" data-toggle-id="dropdownMenuBtn">
-            <a href="#" class="dropdown-item">Action</a>
-            <a href="#" class="dropdown-item">Action #2</a>
-            <a href="#" class="dropdown-item">Action #3</a>
-        </div>
-    </div>`);
-(0,_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('.dropdown-toggle').dropdown();
+// $('.wrap').html(
+//     `
+//     <div class="dropdown">
+//         <button class="btn btn-dark dropdown-toggle" id="dropdownMenuBtn">Dropdown button</button>
+//         <div class="dropdown-menu" data-toggle-id="dropdownMenuBtn">
+//             <a href="#" class="dropdown-item">Action</a>
+//             <a href="#" class="dropdown-item">Action #2</a>
+//             <a href="#" class="dropdown-item">Action #3</a>
+//         </div>
+//     </div>`
+// );
+// $('.dropdown-toggle').dropdown();
 })();
 
 /******/ })()
