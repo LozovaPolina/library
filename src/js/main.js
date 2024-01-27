@@ -22,3 +22,36 @@ import $ from './lib/lib';
 //     </div>`
 // );
 // $('.dropdown-toggle').dropdown();
+
+$('#trigger').click(() => $('#trigger').createModal({
+    text: {
+        title: 'Modal titile',
+        body: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.Modi tenetur quis incidunt',
+    },
+    btns: {
+        count: 3,
+        settings: [
+            [
+                'Close',
+                ['btn-danger', 'mr-10'],
+                true
+            ],
+            [
+                'Save changes',
+                ['btn-success'],
+                false,
+                () => {
+                    alert('Data saved')
+                }
+            ],
+            [
+                'another btn',
+                ['btn-dark','ml-10'],
+                false,
+                () => {
+                    alert('another btn')
+                }
+            ]
+        ]
+    }
+}));

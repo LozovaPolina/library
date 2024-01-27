@@ -32,7 +32,7 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.dropdown = function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./src/js/lib/core.js");
 
-_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.modal = function () {
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.modal = function (created) {
   const scroll = calcScroll();
   for (let i = 0; i < this.length; i++) {
     const target = (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(this[i]).getAttr('data-target');
@@ -41,6 +41,31 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.modal = function () {
       (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(target).fadeIn(500);
       document.body.style.overflow = 'hidden';
       document.body.style.marginRight = `${scroll}px`;
+    });
+    const closeElements = document.querySelectorAll(`${target} [data-close]`);
+    closeElements.forEach(item => {
+      (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(item).click(() => {
+        (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(target).fadeOut(500);
+        setTimeout(() => {
+          document.body.style.overflow = '';
+          document.body.style.marginRight = `${0}px`;
+          if (created) {
+            document.querySelector(target).remove();
+          }
+        }, 500);
+      });
+    });
+    (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(target).click(e => {
+      if (e.target.classList.contains('modal')) {
+        (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(target).fadeOut(500);
+        setTimeout(() => {
+          document.body.style.overflow = '';
+          document.body.style.marginRight = `${0}px`;
+          if (created) {
+            document.querySelector(target).remove();
+          }
+        }, 500);
+      }
     });
   }
   function calcScroll() {
@@ -56,27 +81,54 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.modal = function () {
     div.remove();
     return scrollWidth;
   }
-  const closeElements = document.querySelectorAll('[data-close]');
-  closeElements.forEach(item => {
-    (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(item).click(() => {
-      (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])('.modal').fadeOut(500);
-      setTimeout(() => {
-        document.body.style.overflow = '';
-        document.body.style.marginRight = `${0}px`;
-      }, 500);
-    });
-  });
-  (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])('.modal').click(e => {
-    if (e.target.classList.contains('modal')) {
-      (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])('.modal').fadeOut(500);
-      setTimeout(() => {
-        document.body.style.overflow = '';
-        document.body.style.marginRight = `${0}px`;
-      }, 500);
-    }
-  });
 };
 (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-toggle="modal"]').modal();
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.createModal = function ({
+  text,
+  btns
+} = {}) {
+  for (let i = 0; i < this.length; i++) {
+    let modal = document.createElement('div');
+    modal.classList.add('modal');
+    modal.setAttribute('id', this[i].getAttribute('data-target').slice(1));
+
+    // btns ={count: num, settings: [[text, classNames = [], close, cb]]}
+    const buttons = [];
+    for (let j = 0; j < btns.count; j++) {
+      let [text, classNames, close, cb] = btns.settings[j];
+      let btn = document.createElement('button');
+      btn.classList.add('btn', ...classNames);
+      btn.textContent = text;
+      if (close) {
+        btn.setAttribute('data-close', 'true');
+      }
+      if (cb && typeof cb === 'function') {
+        btn.addEventListener('click', cb);
+      }
+      buttons.push(btn);
+    }
+    modal.innerHTML = `
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <button class="close" data-close>
+                        <span>&times;</span>
+                    </button>
+                    <div class="modal-header">
+                        <div class="madal-title">${text.title}</div>
+                    </div>
+                    <div class="modal-body">${text.body}</div>
+                    <div class="modal-footer">
+
+                    </div>
+                </div>
+            </div>
+            `;
+    modal.querySelector('.modal-footer').append(...buttons);
+    document.body.append(modal);
+    (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(this[i]).modal(true);
+    (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(this[i].getAttribute('data-target')).fadeIn(500);
+  }
+};
 
 /***/ }),
 
@@ -589,6 +641,21 @@ __webpack_require__.r(__webpack_exports__);
 //     </div>`
 // );
 // $('.dropdown-toggle').dropdown();
+
+(0,_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('#trigger').click(() => (0,_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('#trigger').createModal({
+  text: {
+    title: 'Modal titile',
+    body: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.Modi tenetur quis incidunt'
+  },
+  btns: {
+    count: 3,
+    settings: [['Close', ['btn-danger', 'mr-10'], true], ['Save changes', ['btn-success'], false, () => {
+      alert('Data saved');
+    }], ['another btn', ['btn-dark', 'ml-10'], false, () => {
+      alert('another btn');
+    }]]
+  }
+}));
 })();
 
 /******/ })()
