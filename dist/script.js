@@ -424,6 +424,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/actions */ "./src/js/lib/modules/actions.js");
 /* harmony import */ var _modules_effects__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/effects */ "./src/js/lib/modules/effects.js");
 /* harmony import */ var _components_ui__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/ui */ "./src/js/lib/components/ui.js");
+/* harmony import */ var _services_request__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./services/request */ "./src/js/lib/services/request.js");
+
 
 
 
@@ -788,6 +790,46 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.click = function (handle
     }
   }
   return this;
+};
+
+/***/ }),
+
+/***/ "./src/js/lib/services/request.js":
+/*!****************************************!*\
+  !*** ./src/js/lib/services/request.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./src/js/lib/core.js");
+
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.get = async function (url, dataTypeAnswer = 'json') {
+  let res = await fetch(url);
+  if (!res.ok) {
+    throw new Error(`Could not featch ${url}, status ${res.status}`);
+  }
+  switch (dataTypeAnswer) {
+    case 'json':
+      return await res.json();
+    case 'text':
+      return await res.text();
+    case 'blob':
+      return await res.blob();
+  }
+};
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.post = async function (url, data, dataTypeAnswer = 'text') {
+  let res = await fetch(url, {
+    method: 'POST',
+    body: data
+  });
+  switch (dataTypeAnswer) {
+    case 'json':
+      return await res.json();
+    case 'text':
+      return await res.text();
+    case 'blob':
+      return await res.blob();
+  }
 };
 
 /***/ })

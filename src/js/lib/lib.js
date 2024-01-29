@@ -6,4 +6,5 @@ import './modules/attributes';
 import './modules/actions';
 import './modules/effects';
 import './components/ui';
+import './services/request';
 export default $;
