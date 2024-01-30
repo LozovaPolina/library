@@ -168,17 +168,17 @@ $.prototype.createCarousel = function ({ size, slides } = {}) {
     $(`#${slides.sliderAttr}`).carousel();
 
 }
-$('.container').createCarousel({
-    size: { width: 600, height: 400 },
-    slides: {
-        count: 3,
-        settings: [
-            ["https://variety.com/wp-content/uploads/2018/09/witcher-card-game-e1537278354978.jpg?w=1024", "photo"],
-            ["https://images.pushsquare.com/a107d13f1b6a1/the-witcher-3-yennefer-romance.large.jpg", "photo"],
-            ["https://cdn.mos.cms.futurecdn.net/wqRQ8hJmvwLVycDJham9qF.jpg", "photo"],
-        ],
-        btnPrevNext: true,
-        sliderAttr: 'exampleSlide2'
-    },
+// $('.container').createCarousel({
+//     size: { width: 600, height: 400 },
+//     slides: {
+//         count: 3,
+//         settings: [
+//             ["https://variety.com/wp-content/uploads/2018/09/witcher-card-game-e1537278354978.jpg?w=1024", "photo"],
+//             ["https://images.pushsquare.com/a107d13f1b6a1/the-witcher-3-yennefer-romance.large.jpg", "photo"],
+//             ["https://cdn.mos.cms.futurecdn.net/wqRQ8hJmvwLVycDJham9qF.jpg", "photo"],
+//         ],
+//         btnPrevNext: true,
+//         sliderAttr: 'exampleSlide2'
+//     },
 
-})
+// })
